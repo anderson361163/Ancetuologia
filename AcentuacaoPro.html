@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AcentuaçãoPro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   AcentuaçãoPro — style.css
+   Aesthetic: Luxury Editorial / Ink & Gold
+═══════════════════════════════════════════ */
+
+:root {
+  --bg:       #0a0906;
+  --surface:  #14110d;
+  --card:     #1d1812;
+  --border:   #2e2618;
+  --accent:   #d4942a;
+  --gold:     #f0c040;
+  --rust:     #b84f28;
+  --text:     #ede4d2;
+  --muted:    #6b6050;
+  --correct:  #4aad78;
+  --wrong:    #d95050;
+  --r: 3px;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Lora', serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+button { cursor: pointer; font-family: inherit; border: none; background: none; }
+a { text-decoration: none; color: inherit; }
+
+/* ── Grain ── */
+.grain {
+  position: fixed; inset: 0; pointer-events: none; z-index: 9000;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  opacity: .7;
+}
+
+/* ═══════════════════════════════════════════
+   SCREENS
+═══════════════════════════════════════════ */
+.screen {
+  display: none;
+  min-height: 100vh;
+  animation: screenIn .35s ease;
+}
+.screen.active { display: flex; flex-direction: column; }
+
+@keyframes screenIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════
+   HOME
+═══════════════════════════════════════════ */
+#screen-home {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.home-bg-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,.018) 60px),
+    repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(255,255,255,.012) 80px);
+  pointer-events: none;
+}
+
+.home-center {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.5rem;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.logo-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: .65rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: .8rem;
+}
+
+.logo-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 900;
+  line-height: .95;
+  color: var(--text);
+  letter-spacing: -2px;
+}
+.logo-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+.logo-dot { color: var(--rust); }
+
+.logo-sub {
+  font-size: .95rem;
+  color: var(--muted);
+  margin-top: 1.2rem;
+  letter-spacing: .5px;
+}
+
+.home-nav {
+  display: flex;
+  flex-direction: column;
+  gap: .9rem;
+  width: 100%;
+  max-width: 320px;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.15rem 2rem;
+  border-radius: var(--r);
+  font-size: 1rem;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all .2s;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.nav-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: rgba(255,255,255,.04);
+  transition: opacity .2s;
+}
+.nav-btn:hover::after { opacity: 1; }
+.nav-btn:hover { transform: translateY(-2px); }
+
+.nav-btn.primary {
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: 0 6px 30px rgba(212,148,42,.25);
+}
+.nav-btn.primary:hover {
+  background: var(--gold);
+  box-shadow: 0 8px 35px rgba(240,192,64,.3);
+}
+.nav-btn.secondary {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.nav-btn.secondary:hover { border-color: var(--accent); }
+
+.nav-btn-icon { font-size: 1.1rem; }
+.nav-btn-label { flex: 1; text-align: left; }
+
+.home-footer {
+  font-family: 'DM Mono', monospace;
+  font-size: .6rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════
+   PAGE SHELL (about, setup, results)
+═══════════════════════════════════════════ */
+.page-shell {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem 1.2rem 4rem;
+  flex: 1;
+}
+
+.back-btn {
+  font-family: 'DM Mono', monospace;
+  font-size: .7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: .5rem .8rem;
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: all .2s;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: 2rem;
+}
+.back-btn:hover { color: var(--accent); border-color: var(--accent); }
+.back-btn.ghost {
+  border-color: transparent;
+  background: transparent;
+  font-size: .65rem;
+}
+.back-btn.ghost:hover { color: var(--wrong); border-color: var(--wrong); }
+
+/* ═══════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════ */
+.about-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+
+.about-header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--surface), var(--card));
+  border-bottom: 1px solid var(--border);
+}
+
+.about-avatar {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--rust), var(--accent));
+  color: var(--bg);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 20px rgba(212,148,42,.25);
+}
+
+.about-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+.about-role {
+  font-family: 'DM Mono', monospace;
+  font-size: .65rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: .3rem;
+}
+
+.about-links {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--border);
+}
+
+.about-link {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  padding: 1rem 2rem;
+  font-size: .9rem;
+  transition: background .15s;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.about-link:last-child { border-bottom: none; }
+.about-link:hover { background: rgba(212,148,42,.06); }
+
+.link-icon {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .85rem;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.link-arrow { margin-left: auto; color: var(--muted); font-size: .85rem; }
+
+.about-desc {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+}
+.about-desc p {
+  font-size: .9rem;
+  line-height: 1.7;
+  color: var(--text);
+  opacity: .78;
+}
+.about-desc strong { color: var(--accent); font-weight: 600; }
+
+.about-divider { display: none; }
+
+.about-refs { padding: 1.5rem 2rem; }
+
+.refs-label {
+  font-family: 'DM Mono', monospace;
+  font-size: .65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.ref-item {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem;
+  border-radius: var(--r);
+  transition: all .2s;
+}
+.ref-item:hover { border-color: var(--accent); box-shadow: 0 2px 20px rgba(212,148,42,.1); }
+
+.ref-title {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: .95rem;
+  color: var(--text);
+  margin-bottom: .3rem;
+}
+.ref-sub {
+  font-size: .78rem;
+  color: var(--muted);
+  margin-bottom: .5rem;
+  line-height: 1.5;
+}
+.ref-link {
+  font-family: 'DM Mono', monospace;
+  font-size: .65rem;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+
+/* ═══════════════════════════════════════════
+   SETUP
+═══════════════════════════════════════════ */
+.setup-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+
+.setup-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--gold);
+  margin-bottom: .5rem;
+}
+.setup-sub {
+  font-size: .95rem;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+}
+
+.qty-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .7rem;
+  margin-bottom: 2rem;
+}
+
+.qty-btn {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  padding: 1.2rem .5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--surface);
+  color: var(--muted);
+  transition: all .2s;
+}
+.qty-btn:hover, .qty-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(212,148,42,.08);
+  box-shadow: 0 0 20px rgba(212,148,42,.1);
+}
+.qty-btn.active { color: var(--gold); }
+
+.setup-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  justify-content: center;
+  margin-bottom: .8rem;
+}
+.info-chip {
+  font-family: 'DM Mono', monospace;
+  font-size: .6rem;
+  letter-spacing: 1px;
+  padding: .3rem .75rem;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.setup-note {
+  font-size: .8rem;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+  font-style: italic;
+}
+
+.start-btn {
+  width: 100%;
+  padding: 1.1rem;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: 'DM Mono', monospace;
+  font-size: .8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border-radius: var(--r);
+  transition: all .2s;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .8rem;
+}
+.start-btn:hover {
+  background: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(212,148,42,.25);
+}
+
+/* ═══════════════════════════════════════════
+   GAME
+═══════════════════════════════════════════ */
+#screen-game {
+  flex-direction: column;
+}
+
+.game-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.game-progress-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+
+.game-progress-bar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.game-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--rust), var(--accent), var(--gold));
+  transition: width .5s ease;
+  border-radius: 99px;
+}
+
+.progress-label {
+  font-family: 'DM Mono', monospace;
+  font-size: .62rem;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.score-pill {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--correct);
+  background: rgba(74,173,120,.1);
+  border: 1px solid rgba(74,173,120,.25);
+  padding: .3rem .7rem;
+  border-radius: 99px;
+  min-width: 54px;
+  text-align: center;
+}
+
+.game-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1.2rem 3rem;
+  max-width: 660px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.question-card {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  animation: cardIn .3s ease;
+  position: relative;
+}
+.question-card::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rust), var(--accent), var(--gold));
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(10px) scale(.99); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.q-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem .5rem;
+}
+.q-category {
+  font-family: 'DM Mono', monospace;
+  font-size: .62rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(212,148,42,.08);
+  border: 1px solid rgba(212,148,42,.2);
+  padding: .25rem .65rem;
+  border-radius: 2px;
+}
+.q-num {
+  font-family: 'DM Mono', monospace;
+  font-size: .65rem;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.q-text {
+  font-size: .92rem;
+  text-align: center;
+  color: var(--text);
+  opacity: .75;
+  padding: .8rem 1.5rem .3rem;
+}
+
+.word-display {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 7vw, 3.5rem);
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: 3px;
+  padding: 1rem 1.5rem 1.5rem;
+  color: var(--text);
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .6rem;
+  padding: 0 1.2rem 1.2rem;
+}
+
+.option-btn {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 1rem .5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--surface);
+  color: var(--text);
+  transition: all .18s;
+  text-align: center;
+}
+.option-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: rgba(212,148,42,.07);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 18px rgba(212,148,42,.1);
+}
+.option-btn.correct {
+  border-color: var(--correct);
+  background: rgba(74,173,120,.1);
+  color: var(--correct);
+  animation: popIn .35s ease;
+}
+.option-btn.wrong {
+  border-color: var(--wrong);
+  background: rgba(217,80,80,.08);
+  color: var(--wrong);
+  animation: shake .35s ease;
+}
+
+@keyframes popIn {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25%     { transform: translateX(-5px); }
+  75%     { transform: translateX(5px); }
+}
+
+.feedback-block {
+  display: none;
+  margin: 0 1.2rem 1.2rem;
+  padding: 1rem 1.2rem;
+  border-radius: var(--r);
+  animation: fadeUp .3s ease;
+}
+.feedback-block.show { display: block; }
+.feedback-block.correct { background: rgba(74,173,120,.07); border: 1px solid rgba(74,173,120,.25); }
+.feedback-block.wrong   { background: rgba(217,80,80,.06);  border: 1px solid rgba(217,80,80,.2); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fb-header {
+  font-family: 'DM Mono', monospace;
+  font-size: .65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: .4rem;
+}
+.feedback-block.correct .fb-header { color: var(--correct); }
+.feedback-block.wrong   .fb-header { color: var(--wrong); }
+
+.fb-text { font-size: .88rem; line-height: 1.6; opacity: .82; }
+
+.next-btn {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: 'DM Mono', monospace;
+  font-size: .72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border-radius: var(--r);
+  transition: all .2s;
+  font-weight: 500;
+}
+.next-btn:hover {
+  background: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(212,148,42,.2);
+}
+
+/* ═══════════════════════════════════════════
+   RESULTS
+═══════════════════════════════════════════ */
+.results-shell { max-width: 600px; }
+
+.results-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+
+.results-top {
+  padding: 2.5rem 2rem;
+  text-align: center;
+  background: linear-gradient(160deg, var(--surface) 0%, var(--card) 100%);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.results-top::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rust), var(--accent), var(--gold));
+}
+
+.results-trophy { font-size: 3rem; margin-bottom: .8rem; line-height: 1; }
+.results-title {
+  font-family: 'DM Mono', monospace;
+  font-size: .7rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: .5rem;
+}
+.results-score {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+}
+.results-pct {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: .3rem 0 1rem;
+}
+.results-msg {
+  font-size: .9rem;
+  color: var(--text);
+  opacity: .72;
+  line-height: 1.6;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.results-divider {
+  height: 1px;
+  background: var(--border);
+}
+
+.results-general {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1.5rem 2rem;
+}
+.gen-stat { text-align: center; }
+.gen-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+.correct-stat .gen-val { color: var(--correct); }
+.wrong-stat .gen-val   { color: var(--wrong); }
+.gen-label {
+  font-family: 'DM Mono', monospace;
+  font-size: .6rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: .3rem;
+}
+.gen-divider {
+  width: 1px;
+  height: 50px;
+  background: var(--border);
+}
+
+.cat-breakdown {
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--border);
+}
+.breakdown-title {
+  font-family: 'DM Mono', monospace;
+  font-size: .65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.2rem;
+}
+
+.cat-row {
+  margin-bottom: .9rem;
+}
+.cat-row-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .3rem;
+}
+.cat-row-name {
+  font-size: .85rem;
+  color: var(--text);
+  opacity: .8;
+}
+.cat-row-score {
+  font-family: 'DM Mono', monospace;
+  font-size: .75rem;
+  color: var(--accent);
+}
+.cat-bar-bg {
+  height: 5px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.cat-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width .8s ease;
+}
+
+.results-actions {
+  display: flex;
+  gap: .8rem;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--border);
+}
+.action-btn {
+  flex: 1;
+  padding: .9rem;
+  font-family: 'DM Mono', monospace;
+  font-size: .68rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-radius: var(--r);
+  transition: all .2s;
+  font-weight: 500;
+}
+.action-btn.primary {
+  background: var(--accent);
+  color: var(--bg);
+}
+.action-btn.primary:hover { background: var(--gold); }
+.action-btn.secondary {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.action-btn.secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .qty-grid { grid-template-columns: repeat(4, 1fr); }
+  .results-general { padding: 1.2rem 1rem; }
+  .cat-breakdown { padding: 1.2rem 1rem; }
+  .results-actions { flex-direction: column; padding: 1rem; }
+  .options { gap: .5rem; }
+  .option-btn { padding: .8rem .3rem; font-size: 1rem; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- GRAIN OVERLAY -->
+<div class="grain"></div>
+
+<!-- ═══════════════════════════════════════ -->
+<!--  SCREEN 1 — HOME                        -->
+<!-- ═══════════════════════════════════════ -->
+<div id="screen-home" class="screen active">
+  <div class="home-bg-lines"></div>
+  <div class="home-center">
+    <div class="logo-block">
+      <div class="logo-eyebrow">Treinamento de Ortografia</div>
+      <h1 class="logo-title">Acento<em>ua</em>ção<span class="logo-dot">.</span></h1>
+      <p class="logo-sub">Domine as regras da língua portuguesa</p>
+    </div>
+
+    <nav class="home-nav">
+      <button class="nav-btn primary" onclick="App.go('screen-play-setup')">
+        <span class="nav-btn-icon">▶</span>
+        <span class="nav-btn-label">Jogar</span>
+      </button>
+      <button class="nav-btn secondary" onclick="App.go('screen-about')">
+        <span class="nav-btn-icon">◎</span>
+        <span class="nav-btn-label">Sobre</span>
+      </button>
+    </nav>
+
+    <div class="home-footer">v1.0 · Open Source · MIT</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!--  SCREEN 2 — SOBRE                       -->
+<!-- ═══════════════════════════════════════ -->
+<div id="screen-about" class="screen">
+  <div class="page-shell">
+    <button class="back-btn" onclick="App.go('screen-home')">← Voltar</button>
+
+    <div class="about-card">
+      <div class="about-header">
+        <div class="about-avatar">A</div>
+        <div>
+          <h2 class="about-name">Anderson da Silva Machado</h2>
+          <p class="about-role">Desenvolvedor · Open Source</p>
+        </div>
+      </div>
+
+      <div class="about-links">
+        <a class="about-link" href="https://github.com/" target="_blank">
+          <span class="link-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </span>
+          <span>GitHub</span>
+          <span class="link-arrow">↗</span>
+        </a>
+        <a class="about-link" href="https://linkedin.com/" target="_blank">
+          <span class="link-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.93v5.68H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45C23.2 24 24 23.23 24 22.27V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+          </span>
+          <span>LinkedIn</span>
+          <span class="link-arrow">↗</span>
+        </a>
+        <a class="about-link" href="mailto:anderson361163@gmail.com">
+          <span class="link-icon">✉</span>
+          <span>anderson361163@gmail.com</span>
+          <span class="link-arrow">↗</span>
+        </a>
+      </div>
+
+      <div class="about-desc">
+        <p>Este aplicativo é <strong>Open Source</strong> e foi desenvolvido para fins de estudo pessoal das regras de acentuação da língua portuguesa.</p>
+        <p>Para dicas, sugestões ou reclamações, entre em contato pelo e-mail acima.</p>
+      </div>
+
+      <div class="about-divider"></div>
+
+      <div class="about-refs">
+        <div class="refs-label">Referências Bibliográficas</div>
+        <a class="ref-item" href="https://www.academia.org.br/sites/default/files/conteudo/o_acordo_ortogr_fico_da_lngua_portuguesa_anexoi_e_ii.pdf" target="_blank">
+          <div class="ref-title">Acordo Ortográfico da Língua Portuguesa</div>
+          <div class="ref-sub">Lisboa, 14, 15 e 16 de dezembro de 1990 · Academia Brasileira de Letras</div>
+          <div class="ref-link">Acessar documento ↗</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!--  SCREEN 3 — SETUP                       -->
+<!-- ═══════════════════════════════════════ -->
+<div id="screen-play-setup" class="screen">
+  <div class="page-shell">
+    <button class="back-btn" onclick="App.go('screen-home')">← Voltar</button>
+
+    <div class="setup-card">
+      <h2 class="setup-title">Nova Partida</h2>
+      <p class="setup-sub">Quantas perguntas deseja responder?</p>
+
+      <div class="qty-grid">
+        <button class="qty-btn active" data-qty="10" onclick="App.selectQty(this)">10</button>
+        <button class="qty-btn" data-qty="20" onclick="App.selectQty(this)">20</button>
+        <button class="qty-btn" data-qty="30" onclick="App.selectQty(this)">30</button>
+        <button class="qty-btn" data-qty="40" onclick="App.selectQty(this)">40</button>
+      </div>
+
+      <div class="setup-info">
+        <div class="info-chip">Oxítonas</div>
+        <div class="info-chip">Paroxítonas</div>
+        <div class="info-chip">Proparoxítonas</div>
+        <div class="info-chip">Hiatos</div>
+        <div class="info-chip">Acento Diferencial</div>
+      </div>
+      <p class="setup-note">Perguntas aleatórias de todas as categorias</p>
+
+      <button class="start-btn" onclick="App.startGame()">
+        Iniciar <span>▶</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!--  SCREEN 4 — GAME                        -->
+<!-- ═══════════════════════════════════════ -->
+<div id="screen-game" class="screen">
+  <div class="game-header">
+    <button class="back-btn ghost" onclick="App.confirmQuit()">✕ Sair</button>
+    <div class="game-progress-wrap">
+      <div class="game-progress-bar"><div class="game-progress-fill" id="progress-fill"></div></div>
+      <span class="progress-label" id="progress-label">1 / 10</span>
+    </div>
+    <div class="score-pill"><span id="hdr-score">0</span> ✓</div>
+  </div>
+
+  <div class="game-body">
+    <div class="question-card" id="question-card">
+      <div class="q-meta">
+        <span class="q-category" id="q-category">Oxítonas</span>
+        <span class="q-num" id="q-num">Q1</span>
+      </div>
+
+      <p class="q-text" id="q-text">Selecione a alternativa correta:</p>
+      <div class="word-display" id="word-display"></div>
+
+      <div class="options" id="options"></div>
+
+      <div class="feedback-block" id="feedback-block">
+        <div class="fb-header" id="fb-header"></div>
+        <p class="fb-text" id="fb-text"></p>
+      </div>
+    </div>
+
+    <button class="next-btn" id="next-btn" onclick="App.next()" style="display:none">
+      Próxima pergunta →
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!--  SCREEN 5 — RESULTS                     -->
+<!-- ═══════════════════════════════════════ -->
+<div id="screen-results" class="screen">
+  <div class="page-shell results-shell">
+    <div class="results-card">
+      <div class="results-top">
+        <div class="results-trophy" id="results-trophy">🏆</div>
+        <h2 class="results-title">Resultado</h2>
+        <div class="results-score" id="results-score">0/0</div>
+        <div class="results-pct" id="results-pct">0%</div>
+        <p class="results-msg" id="results-msg"></p>
+      </div>
+
+      <div class="results-divider"></div>
+
+      <div class="results-general">
+        <div class="gen-stat correct-stat">
+          <div class="gen-val" id="gen-correct">0</div>
+          <div class="gen-label">Acertos</div>
+        </div>
+        <div class="gen-divider"></div>
+        <div class="gen-stat wrong-stat">
+          <div class="gen-val" id="gen-wrong">0</div>
+          <div class="gen-label">Erros</div>
+        </div>
+        <div class="gen-divider"></div>
+        <div class="gen-stat">
+          <div class="gen-val" id="gen-total">0</div>
+          <div class="gen-label">Total</div>
+        </div>
+      </div>
+
+      <div class="results-divider"></div>
+
+      <div class="cat-breakdown" id="cat-breakdown">
+        <div class="breakdown-title">Desempenho por Categoria</div>
+        <!-- filled by JS -->
+      </div>
+
+      <div class="results-actions">
+        <button class="action-btn primary" onclick="App.startGame()">↩ Jogar Novamente</button>
+        <button class="action-btn secondary" onclick="App.go('screen-home')">⌂ Início</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════
+   AcentuaçãoPro — data.js
+   Banco de perguntas por categoria
+═══════════════════════════════════════════ */
+
+const QUESTIONS_DB = {
+
+  "Oxítonas": [
+    { text: "Qual a forma correta?", word: "CAF_", options: ["cafe", "café", "cafê", "cafè"], correct: 1, exp: "\"Café\" é oxítona terminada em -E, portanto recebe acento agudo." },
+    { text: "Escolha a palavra acentuada corretamente:", word: "TAMB_M", options: ["tambem", "tamvém", "também", "tambêm"], correct: 2, exp: "\"Também\" é oxítona terminada em -EM, recebe acento agudo." },
+    { text: "Como se escreve corretamente?", word: "AV_", options: ["avo", "avô", "avó", "àvo"], correct: 2, exp: "\"Avó\" (feminino de avô) é oxítona terminada em -O, recebe acento agudo." },
+    { text: "Qual a grafia correta?", word: "BA_", options: ["bau", "baú", "baû", "bàu"], correct: 1, exp: "\"Baú\" é oxítona terminada em -U, recebe acento agudo." },
+    { text: "Escolha a opção correta:", word: "P_S", options: ["pes", "pês", "pés", "pès"], correct: 2, exp: "\"Pés\" é oxítona terminada em -ES, recebe acento agudo." },
+    { text: "Qual a forma correta?", word: "REF_M", options: ["refem", "réfem", "refêm", "refém"], correct: 3, exp: "\"Refém\" é oxítona terminada em -EM, recebe acento agudo." },
+    { text: "Como se escreve?", word: "CIP_", options: ["cipo", "cipó", "cipô", "cìpo"], correct: 1, exp: "\"Cipó\" é oxítona terminada em -O, recebe acento agudo." },
+    { text: "Qual a grafia correta?", word: "PORTUGU_S", options: ["portugues", "português", "portugûes", "portugúes"], correct: 1, exp: "\"Português\" é oxítona terminada em -ÊS, recebe acento circunflexo." },
+    { text: "Qual a forma correta?", word: "SOF_", options: ["sofa", "sofá", "sofâ", "sòfa"], correct: 1, exp: "\"Sofá\" é oxítona terminada em -A, recebe acento agudo." },
+    { text: "Como se escreve corretamente?", word: "MAM_", options: ["mama", "mamà", "mamã", "mamâ"], correct: 2, exp: "\"Mamã\" é oxítona terminada em -Ã (nasal), recebe til." },
+    { text: "Qual a grafia correta?", word: "CAP_", options: ["capa", "capá", "capaz", "capà"], correct: 2, exp: "\"Capaz\" é oxítona terminada em -Z, não recebe acento." },
+    { text: "Escolha a opção certa:", word: "IRJ_", options: ["irma", "irmã", "irmâ", "irmà"], correct: 1, exp: "\"Irmã\" é oxítona terminada em -Ã, recebe til." },
+    { text: "Qual a forma correta?", word: "ARAN_", options: ["aranhe", "aranhê", "aranhé", "aranhê"], correct: 0, exp: "\"Aranha\" é paroxítona, não oxítona — não recebe acento." },
+    { text: "Escolha a palavra correta:", word: "RAP_Z", options: ["rapaz", "rapáz", "rapàz", "rapâz"], correct: 0, exp: "\"Rapaz\" é oxítona terminada em -Z, mas essa terminação não recebe acento." },
+    { text: "Qual a grafia correta?", word: "MAR_", options: ["mare", "maré", "marê", "màre"], correct: 1, exp: "\"Maré\" é oxítona terminada em -É, recebe acento agudo." },
+  ],
+
+  "Paroxítonas": [
+    { text: "Qual a forma correta?", word: "F_CIL", options: ["facil", "fácil", "fàcil", "facîl"], correct: 1, exp: "\"Fácil\" é paroxítona terminada em -L, que é terminação incomum. Recebe acento." },
+    { text: "Escolha a grafia correta:", word: "ORIG_M", options: ["origem", "orígem", "origêm", "origém"], correct: 0, exp: "\"Origem\" é paroxítona terminada em -EM — terminação comum. Não se acentua." },
+    { text: "Como se escreve corretamente?", word: "L_PIS", options: ["lapis", "lápis", "lapís", "lapîs"], correct: 1, exp: "\"Lápis\" é paroxítona terminada em -IS — terminação incomum. Recebe acento." },
+    { text: "Qual a forma correta?", word: "_LBUM", options: ["album", "álbum", "albûm", "àlbum"], correct: 1, exp: "\"Álbum\" é paroxítona terminada em -UM — terminação incomum. Recebe acento agudo." },
+    { text: "Escolha a opção certa:", word: "J_NIOR", options: ["junior", "júnior", "jûnior", "júniòr"], correct: 1, exp: "\"Júnior\" é paroxítona terminada em -R — terminação incomum. Recebe acento." },
+    { text: "Qual a grafia correta?", word: "V_RUS", options: ["virus", "vírus", "vîrus", "vìrus"], correct: 1, exp: "\"Vírus\" é paroxítona terminada em -US — terminação incomum. Recebe acento." },
+    { text: "Como se escreve?", word: "AC_CAR", options: ["acucar", "açucar", "açúcar", "àçucar"], correct: 2, exp: "\"Açúcar\" é paroxítona terminada em -R — recebe acento agudo." },
+    { text: "Qual a forma correta?", word: "F_RUM", options: ["forum", "fórum", "forûm", "fòrum"], correct: 1, exp: "\"Fórum\" é paroxítona terminada em -UM — recebe acento agudo." },
+    { text: "Escolha a grafia correta:", word: "C_RCER", options: ["cancer", "câncer", "câncêr", "cáncèr"], correct: 1, exp: "\"Câncer\" é paroxítona terminada em -ER — recebe acento circunflexo." },
+    { text: "Qual a forma correta?", word: "_RDEM", options: ["ordem", "órdèm", "ôrdem", "ordém"], correct: 0, exp: "\"Ordem\" é paroxítona terminada em -EM — terminação comum. Não se acentua." },
+    { text: "Como se escreve?", word: "BIC_PS", options: ["biceps", "bíceps", "bicêps", "bicèps"], correct: 1, exp: "\"Bíceps\" é paroxítona terminada em -PS — terminação incomum. Recebe acento." },
+    { text: "Qual a grafia correta?", word: "C_REM", options: ["carem", "cárem", "carem", "cârêm"], correct: 2, exp: "\"Carem\" não existe — a forma correta é \"caráter\", que é paroxítona." },
+    { text: "Escolha a opção certa:", word: "IMF_CEL", options: ["imfacel", "infácel", "infácil", "infazil"], correct: 2, exp: "\"Infácil\" — paroxítona terminada em -L. Recebe acento agudo." },
+    { text: "Qual a forma correta?", word: "_RAZI", options: ["grazi", "grázil", "grácil", "gracil"], correct: 2, exp: "\"Grácil\" é paroxítona terminada em -L — recebe acento agudo." },
+    { text: "Como se escreve corretamente?", word: "_RG_O", options: ["orgao", "órgão", "orgão", "orgâo"], correct: 1, exp: "\"Órgão\" é paroxítona terminada em -ÃO — recebe acento agudo." },
+  ],
+
+  "Proparoxítonas": [
+    { text: "Escolha a grafia correta:", word: "M_DICO", options: ["medico", "médico", "medicó", "mèdico"], correct: 1, exp: "\"Médico\" é proparoxítona. TODAS as proparoxítonas levam acento, sem exceção." },
+    { text: "Qual a forma correta?", word: "_NIBUS", options: ["onibus", "ônibus", "omibus", "ônibùs"], correct: 1, exp: "\"Ônibus\" é proparoxítona terminada em -US — leva acento circunflexo." },
+    { text: "Como se escreve?", word: "P_SSARO", options: ["passaro", "pássaro", "passarô", "pàssaro"], correct: 1, exp: "\"Pássaro\" é proparoxítona — recebe acento agudo na antepenúltima sílaba." },
+    { text: "Qual a grafia correta?", word: "RET_NGULO", options: ["retangulo", "retãngulo", "retângulo", "rêtangulo"], correct: 2, exp: "\"Retângulo\" é proparoxítona — recebe acento circunflexo." },
+    { text: "Escolha a opção correta:", word: "_TIMO", options: ["otimo", "ótimo", "otimô", "otìmo"], correct: 1, exp: "\"Ótimo\" é proparoxítona — recebe acento agudo." },
+    { text: "Como se escreve corretamente?", word: "MAT_RIA", options: ["materia", "matéria", "materîa", "máteria"], correct: 1, exp: "\"Matéria\" é proparoxítona — recebe acento agudo." },
+    { text: "Qual a forma correta?", word: "_PERA", options: ["opera", "ópera", "operà", "opèra"], correct: 1, exp: "\"Ópera\" é proparoxítona — recebe acento agudo." },
+    { text: "Escolha a grafia correta:", word: "C_DIGO", options: ["codigo", "código", "codìgo", "cõdigo"], correct: 1, exp: "\"Código\" é proparoxítona — recebe acento agudo." },
+    { text: "Qual a forma correta?", word: "MATEM_TICA", options: ["matematica", "matemática", "mathematica", "matemàtica"], correct: 1, exp: "\"Matemática\" é proparoxítona — todas levam acento, sem exceção." },
+    { text: "Como se escreve?", word: "P_BLICO", options: ["publico", "público", "públicò", "publíco"], correct: 1, exp: "\"Público\" é proparoxítona — recebe acento agudo." },
+    { text: "Qual a grafia correta?", word: "F_SICA", options: ["fisica", "físíca", "física", "físicá"], correct: 2, exp: "\"Física\" é proparoxítona — recebe acento agudo na sílaba FÍ." },
+    { text: "Escolha a opção certa:", word: "_NICO", options: ["unico", "único", "unìco", "unicô"], correct: 1, exp: "\"Único\" é proparoxítona — recebe acento agudo." },
+    { text: "Qual a forma correta?", word: "HIST_RIA", options: ["historia", "história", "histôria", "historìa"], correct: 1, exp: "\"História\" é proparoxítona — recebe acento agudo." },
+    { text: "Como se escreve corretamente?", word: "SIM_TRICO", options: ["simetrico", "simétrico", "simetrîco", "simètrico"], correct: 1, exp: "\"Simétrico\" é proparoxítona — recebe acento agudo." },
+    { text: "Qual a grafia correta?", word: "N_MERO", options: ["numero", "número", "numêro", "nùmero"], correct: 1, exp: "\"Número\" é proparoxítona — recebe acento agudo." },
+  ],
+
+  "Hiatos": [
+    { text: "Qual a forma correta?", word: "SA_DE", options: ["saude", "saúde", "sàude", "saûde"], correct: 1, exp: "O U de \"saúde\" forma hiato com o A e é tônico — recebe acento agudo." },
+    { text: "Escolha a grafia correta:", word: "RA_NHA", options: ["rainha", "raínha", "râinha", "raìnha"], correct: 0, exp: "Pelo Acordo Ortográfico de 2009, o acento em \"rainha\" foi abolido (I após ditongo)." },
+    { text: "Como se escreve?", word: "JU_ZO", options: ["juizo", "juízo", "juîzo", "jùizo"], correct: 1, exp: "O I de \"juízo\" forma hiato e é tônico — recebe acento agudo." },
+    { text: "Qual a forma correta?", word: "CAFE_NA", options: ["cafeina", "caféina", "cafeína", "cafèina"], correct: 2, exp: "O I de \"cafeína\" está em hiato com o E e é tônico — recebe acento." },
+    { text: "Escolha a grafia correta:", word: "PA_S", options: ["pais", "país", "pàis", "paîs"], correct: 1, exp: "O I de \"país\" está em hiato com o A e é tônico — recebe acento agudo." },
+    { text: "Como se escreve corretamente?", word: "EGO_SMO", options: ["egoismo", "egoísmo", "egoîsmo", "egòismo"], correct: 1, exp: "O I de \"egoísmo\" está em hiato e é tônico — recebe acento agudo." },
+    { text: "Qual a grafia correta?", word: "CONSTITU_R", options: ["constituir", "constituír", "constitúir", "constituîr"], correct: 0, exp: "\"Constituir\" — pelo Acordo de 2009, o acento foi abolido em verbos com U/I em hiato após vogal." },
+    { text: "Qual a forma correta?", word: "BA_LA", options: ["baila", "baíla", "bàila", "baîla"], correct: 0, exp: "\"Baila\" — o I está após ditongo (AI). Pelo Acordo de 2009, não recebe acento." },
+    { text: "Como se escreve?", word: "SA_R", options: ["sair", "saír", "sàir", "saîr"], correct: 0, exp: "\"Sair\" — pelo Acordo Ortográfico de 2009, o acento nesses verbos foi abolido." },
+    { text: "Qual a forma correta?", word: "GRA_DA", options: ["graida", "graída", "gràida", "graîda"], correct: 0, exp: "\"Graída\" não existe. \"Grávida\" é proparoxítona — contexto diferente de hiato." },
+    { text: "Escolha a grafia correta:", word: "RA_Z", options: ["raiz", "raíz", "ràiz", "raîz"], correct: 0, exp: "\"Raiz\" — o I em hiato aqui forma sílaba sozinho, mas a terminação em -Z desfaz a necessidade de acento pelo Acordo de 2009." },
+    { text: "Qual a forma correta?", word: "RU_M", options: ["ruim", "ruím", "rûim", "ruîm"], correct: 0, exp: "\"Ruim\" — pelo Acordo Ortográfico de 2009, o acento em \"ruím\" foi eliminado." },
+    { text: "Como se escreve corretamente?", word: "CO_BR", options: ["cobra", "coíbra", "còibra", "coîbra"], correct: 0, exp: "\"Cobra\" é paroxítona comum, sem hiato — não recebe acento." },
+    { text: "Qual a grafia correta?", word: "EGO_STA", options: ["egoista", "egoísta", "egoîsta", "egòista"], correct: 1, exp: "\"Egoísta\" — o I forma hiato tônico com o E anterior, recebe acento agudo." },
+    { text: "Escolha a opção correta:", word: "HEROI_SMO", options: ["heroismo", "heroísmo", "heroîsmo", "heròismo"], correct: 1, exp: "\"Heroísmo\" — o I forma hiato tônico, mas atenção: não está após ditongo. Recebe acento." },
+  ],
+
+  "Acento Diferencial": [
+    { text: "Qual uso de 'por/pôr' está correto?", word: "POR / P_R", options: ["Por (verbo)", "Pôr (verbo)", "Pór (verbo)", "Por (ambos)"], correct: 1, exp: "\"Pôr\" (circunflexo) é o VERBO (pôr a mesa). \"Por\" sem acento é a PREPOSIÇÃO (obrigado por tudo)." },
+    { text: "Frase: 'Ele ___ dormir cedo ontem.'", word: "PODE / P_DE", options: ["pode", "pôde", "pòde", "pódë"], correct: 1, exp: "\"Pôde\" (passado) leva circunflexo. \"Pode\" (presente) não leva acento." },
+    { text: "Qual a forma correta para o verbo TER no plural?", word: "TEM / T_M", options: ["tem (plural)", "têm (plural)", "tém (plural)", "tèm (plural)"], correct: 1, exp: "\"Têm\" (eles têm, plural) leva circunflexo. \"Tem\" (ele tem, singular) não leva." },
+    { text: "E para o verbo VIR no plural?", word: "VEM / V_M", options: ["vem (plural)", "vêm (plural)", "vém (plural)", "vèm (plural)"], correct: 1, exp: "\"Vêm\" (eles vêm, plural) leva circunflexo. \"Vem\" (ele vem, singular) não leva." },
+    { text: "Qual a forma correta? 'Coloquei o livro ___ mesa'", word: "A / _", options: ["a mesa", "à mesa", "â mesa", "á mesa"], correct: 1, exp: "\"À\" é a crase: contração de 'a' (preposição) + 'a' (artigo). Usa-se acento grave." },
+    { text: "Escolha o uso correto:", word: "'Vou ___ o casaco'", options: ["por o casaco", "pôr o casaco", "pór o casaco", "pòr o casaco"], correct: 1, exp: "O verbo \"pôr\" (colocar) leva acento circunflexo. \"Por\" sem acento é preposição." },
+    { text: "Qual a forma correta?", word: "CONT_M / CONTEM", options: ["Os livros contem...", "Os livros contêm...", "Os livros contém...", "Os livros cóntem..."], correct: 1, exp: "\"Contêm\" é plural de \"contém\" — o circunflexo diferencia o plural do singular." },
+    { text: "Frase: 'Ele ___ sido premiado.'", word: "TEM / T_M", options: ["têm sido", "tem sido", "tém sido", "tèm sido"], correct: 1, exp: "Sujeito singular (ele) exige \"tem\" (sem acento). \"Têm\" seria para sujeito plural." },
+    { text: "Qual uso está correto?", word: "'Vou ___ praia'", options: ["a praia", "à praia", "â praia", "á praia"], correct: 1, exp: "\"à praia\" usa crase porque há fusão de preposição 'a' + artigo feminino 'a'. Correto: à." },
+    { text: "Escolha a opção correta:", word: "MANT_M / MANTEM", options: ["Eles mantem...", "Eles mantêm...", "Eles mantém...", "Eles mántem..."], correct: 1, exp: "\"Mantêm\" (plural) leva acento circunflexo. \"Mantém\" (singular) leva acento agudo." },
+    { text: "Qual a forma correta?", word: "DETEN_M / DETEM", options: ["Eles detem...", "Eles detém...", "Eles detêm...", "Eles détém..."], correct: 2, exp: "\"Detêm\" (eles, plural) leva circunflexo. O acento diferencia plural de singular." },
+    { text: "Frase: 'Ele ___ o poder.'", word: "DET_M", options: ["detêm", "detem", "detém", "detèm"], correct: 2, exp: "\"Detém\" (ele, singular) leva acento agudo. É o acento diferencial entre singular e plural." },
+    { text: "Qual o uso correto de crase?", word: "'Fui ___ escola'", options: ["a escola", "à escola", "â escola", "á escola"], correct: 1, exp: "\"à escola\" — crase obrigatória: preposição 'a' + artigo feminino 'a'. Usa-se acento grave." },
+    { text: "Escolha a opção correta:", word: "'Ele ___ ir'", options: ["pode ir", "pôde ir", "pódê ir", "pòde ir"], correct: 0, exp: "\"Pode\" (presente) não leva acento. \"Pôde\" (passado) levaria circunflexo." },
+    { text: "Qual a forma correta?", word: "CONV_M / CONVEM", options: ["Elas convem...", "Elas convém...", "Elas convêm...", "Elas cónvem..."], correct: 2, exp: "\"Convêm\" (plural) leva circunflexo. \"Convém\" (singular) leva acento agudo." },
+  ]
+};
+
+</script>
+<script>
+/* ═══════════════════════════════════════════
+   AcentuaçãoPro — app.js
+   Lógica principal do aplicativo
+═══════════════════════════════════════════ */
+
+const App = (() => {
+
+  // ── State ────────────────────────────────
+  let state = {
+    qty: 10,
+    questions: [],
+    index: 0,
+    answered: false,
+    score: 0,
+    // Per-category tracking
+    catStats: {},    // { "Oxítonas": { correct: 0, total: 0 }, ... }
+  };
+
+  // ── Navigation ───────────────────────────
+  function go(screenId) {
+    document.querySelectorAll('.screen').forEach(s => {
+      s.classList.remove('active');
+      s.style.display = '';
+    });
+    const target = document.getElementById(screenId);
+    target.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  // ── Setup ────────────────────────────────
+  function selectQty(btn) {
+    document.querySelectorAll('.qty-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.qty = parseInt(btn.dataset.qty);
+  }
+
+  // ── Build question pool (randomized across all categories) ──
+  function buildPool(qty) {
+    const categories = Object.keys(QUESTIONS_DB);
+    let pool = [];
+
+    // Gather all questions tagged with category
+    categories.forEach(cat => {
+      QUESTIONS_DB[cat].forEach(q => {
+        pool.push({ ...q, category: cat });
+      });
+    });
+
+    // Shuffle
+    pool = pool.sort(() => Math.random() - 0.5);
+
+    // If requested qty > available, cycle
+    let result = [];
+    while (result.length < qty) {
+      result = result.concat(pool.sort(() => Math.random() - 0.5));
+    }
+    return result.slice(0, qty);
+  }
+
+  // ── Start game ───────────────────────────
+  function startGame() {
+    // Reset state
+    state.questions = buildPool(state.qty);
+    state.index = 0;
+    state.answered = false;
+    state.score = 0;
+    state.catStats = {};
+
+    Object.keys(QUESTIONS_DB).forEach(cat => {
+      state.catStats[cat] = { correct: 0, total: 0 };
+    });
+
+    go('screen-game');
+    renderQuestion();
+  }
+
+  // ── Render question ──────────────────────
+  function renderQuestion() {
+    const q = state.questions[state.index];
+    state.answered = false;
+
+    // Header
+    document.getElementById('progress-label').textContent =
+      `${state.index + 1} / ${state.questions.length}`;
+    document.getElementById('progress-fill').style.width =
+      `${(state.index / state.questions.length) * 100}%`;
+    document.getElementById('hdr-score').textContent = state.score;
+
+    // Card meta
+    document.getElementById('q-category').textContent = q.category;
+    document.getElementById('q-num').textContent = `Q${state.index + 1}`;
+    document.getElementById('q-text').textContent = q.text;
+
+    // Word display — replace _ with ···
+    document.getElementById('word-display').textContent =
+      q.word.replace(/_/g, '···');
+
+    // Options
+    const optsEl = document.getElementById('options');
+    optsEl.innerHTML = '';
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.textContent = opt;
+      btn.onclick = () => checkAnswer(i);
+      optsEl.appendChild(btn);
+    });
+
+    // Reset feedback
+    const fb = document.getElementById('feedback-block');
+    fb.className = 'feedback-block';
+    fb.querySelector('#fb-header').textContent = '';
+    fb.querySelector('#fb-text').textContent = '';
+
+    // Hide next button, re-animate card
+    const nextBtn = document.getElementById('next-btn');
+    nextBtn.style.display = 'none';
+
+    const card = document.getElementById('question-card');
+    card.style.animation = 'none';
+    void card.offsetWidth; // reflow
+    card.style.animation = '';
+  }
+
+  // ── Check answer ─────────────────────────
+  function checkAnswer(chosen) {
+    if (state.answered) return;
+    state.answered = true;
+
+    const q = state.questions[state.index];
+    const btns = document.querySelectorAll('.option-btn');
+    const fb = document.getElementById('feedback-block');
+    const fbHeader = document.getElementById('fb-header');
+    const fbText = document.getElementById('fb-text');
+
+    btns.forEach(b => { b.disabled = true; });
+    btns[q.correct].classList.add('correct');
+
+    // Update cat stats
+    state.catStats[q.category].total++;
+
+    if (chosen === q.correct) {
+      state.score++;
+      state.catStats[q.category].correct++;
+      fb.className = 'feedback-block show correct';
+      fbHeader.textContent = '✓ Correto!';
+    } else {
+      btns[chosen].classList.add('wrong');
+      fb.className = 'feedback-block show wrong';
+      fbHeader.textContent = '✗ Incorreto';
+    }
+
+    fbText.textContent = q.exp;
+    document.getElementById('hdr-score').textContent = state.score;
+    document.getElementById('next-btn').style.display = 'block';
+
+    // If last question, change button text
+    if (state.index === state.questions.length - 1) {
+      document.getElementById('next-btn').textContent = 'Ver Resultado →';
+    } else {
+      document.getElementById('next-btn').textContent = 'Próxima pergunta →';
+    }
+  }
+
+  // ── Next question ─────────────────────────
+  function next() {
+    state.index++;
+    if (state.index >= state.questions.length) {
+      showResults();
+    } else {
+      renderQuestion();
+    }
+  }
+
+  // ── Show results ──────────────────────────
+  function showResults() {
+    const total = state.questions.length;
+    const correct = state.score;
+    const wrong = total - correct;
+    const pct = Math.round((correct / total) * 100);
+
+    // Trophy & message
+    let trophy, msg;
+    if (pct === 100)      { trophy = '🏆'; msg = 'Perfeito! Você domina a acentuação do português com maestria!'; }
+    else if (pct >= 80)   { trophy = '🥇'; msg = 'Excelente! Você tem ótimo domínio das regras de acentuação. Continue praticando!'; }
+    else if (pct >= 60)   { trophy = '🥈'; msg = 'Bom trabalho! Ainda há espaço para melhorar. Revise as regras e tente novamente.'; }
+    else if (pct >= 40)   { trophy = '🥉'; msg = 'Continue praticando! Leia as explicações com atenção e tente outra vez.'; }
+    else                  { trophy = '📚'; msg = 'Não desanime! A acentuação tem regras específicas. Revise e pratique mais!'; }
+
+    document.getElementById('results-trophy').textContent = trophy;
+    document.getElementById('results-score').textContent = `${correct}/${total}`;
+    document.getElementById('results-pct').textContent = `${pct}%`;
+    document.getElementById('results-msg').textContent = msg;
+    document.getElementById('gen-correct').textContent = correct;
+    document.getElementById('gen-wrong').textContent = wrong;
+    document.getElementById('gen-total').textContent = total;
+
+    // Category breakdown
+    const breakdownEl = document.getElementById('cat-breakdown');
+    // Keep title
+    const title = breakdownEl.querySelector('.breakdown-title');
+    breakdownEl.innerHTML = '';
+    breakdownEl.appendChild(title);
+
+    const cats = Object.keys(state.catStats).filter(c => state.catStats[c].total > 0);
+
+    if (cats.length === 0) {
+      const empty = document.createElement('p');
+      empty.style.cssText = 'font-size:.85rem;color:var(--muted);font-style:italic;';
+      empty.textContent = 'Nenhuma categoria registrada.';
+      breakdownEl.appendChild(empty);
+    } else {
+      cats.forEach(cat => {
+        const s = state.catStats[cat];
+        const catPct = s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0;
+        const color = catPct >= 70 ? 'var(--correct)' : catPct >= 40 ? 'var(--accent)' : 'var(--wrong)';
+
+        const row = document.createElement('div');
+        row.className = 'cat-row';
+        row.innerHTML = `
+          <div class="cat-row-header">
+            <span class="cat-row-name">${cat}</span>
+            <span class="cat-row-score">${s.correct}/${s.total} (${catPct}%)</span>
+          </div>
+          <div class="cat-bar-bg">
+            <div class="cat-bar-fill" style="width:0%;background:${color};" data-width="${catPct}"></div>
+          </div>
+        `;
+        breakdownEl.appendChild(row);
+      });
+    }
+
+    go('screen-results');
+
+    // Animate bars after transition
+    setTimeout(() => {
+      document.querySelectorAll('.cat-bar-fill').forEach(bar => {
+        bar.style.width = bar.dataset.width + '%';
+      });
+    }, 200);
+  }
+
+  // ── Confirm quit ──────────────────────────
+  function confirmQuit() {
+    if (confirm('Deseja sair? O progresso será perdido.')) {
+      go('screen-home');
+    }
+  }
+
+  // ── Public API ────────────────────────────
+  return { go, selectQty, startGame, next, confirmQuit };
+
+})();
+
+</script>
+</body>
+</html>
