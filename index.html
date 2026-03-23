@@ -1380,6 +1380,12 @@ const App = (() => {
     btn.classList.add('active');
     state.qty = parseInt(btn.dataset.qty);
   }
+  // ── Shuffle options per question ─────────
+  function shuffleOptions(q) {
+    const correctText = q.options[q.correct];
+    const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+    return { ...q, options: shuffled, correct: shuffled.indexOf(correctText) };
+  }
 
   // ── Build question pool (randomized across all categories) ──
   function buildPool(qty) {
@@ -1389,7 +1395,8 @@ const App = (() => {
     // Gather all questions tagged with category
     categories.forEach(cat => {
       QUESTIONS_DB[cat].forEach(q => {
-        pool.push({ ...q, category: cat });
+        //pool.push({ ...q, category: cat });
+        pool.push(shuffleOptions({ ...q, category: cat }));
       });
     });
 
